@@ -20,8 +20,8 @@ public class Main {
         players.add(new Player("JJ Natdanai", dice, board));
         players.add(new Player("James", dice, board));
 
-        MGame game = new MGame(players, board, dice);
-        game.playGame(20);
+        MGame game = new MGame(players, board, dice, 20);
+        game.playGame();
     }
 }
 
@@ -31,12 +31,12 @@ class MGame {
     private Board board;
     private int roundCount;
     private ArrayList<Player> players;
-
-    public MGame(ArrayList<Player> players, Board board, Die[] dice) {
+    private int n;
+    public MGame(ArrayList<Player> players, Board board, Die[] dice, int n) {
 
         this.board = board;
         this.dice = dice;
-
+        this.n = n;
         if (players.size() < 2 || players.size() > 8) {
             throw new IllegalArgumentException("ผู้เล่นขั้นต่ำต้องมี 2 คน และ ไม่เกิน 8 คน");
         }
@@ -45,8 +45,8 @@ class MGame {
         this.roundCount = 0;
     }
 
-    public void playGame(int n) {
-        while (roundCount < n) {
+    public void playGame() {
+        while (roundCount < this.n) {
             System.out.println("รอบที่ " + (roundCount+1));
             playRound();
             this.roundCount++;
